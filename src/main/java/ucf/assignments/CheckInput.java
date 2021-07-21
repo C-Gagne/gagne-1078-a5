@@ -5,22 +5,52 @@
 
 package ucf.assignments;
 
-import java.math.BigDecimal;
-
 public class CheckInput
 {
-    public boolean checkItemValue(BigDecimal itemValue)
+    public boolean checkItemValue(String itemValue)
     {
         // Get item value, then make sure it is a valid input
-        return false;
+        int decimalCount = 0;
+
+
+        for (int i = 0; i < itemValue.length(); i++)
+        {
+            char charToCheck = itemValue.charAt(i);
+
+            if (decimalCount > 1) {
+                return false;
+            }
+            else if (charToCheck == '.')
+            {
+                decimalCount++;
+            }
+            else if (!Character.isDigit(charToCheck))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
-    public boolean checkSerialNumber(String serialNumber, Inventory listInventoryItems)
+    public boolean checkSerialNumberValidity(String serialNumber)
     {
         // Get serial number and existing list of items
             // Make sure length is 10.
                 // Check that serial number is valid (only numbers and letters)
-                    // Then check that it does not already exist in the list of inventory items.
+        if (serialNumber.length() != 10)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean checkSerialNumberUniqueness(String serialNumber)
+    {
+        // Check list of Inventory Items for the serial number.
+            // If it exists, return false.
+                // Else return true.
         return false;
     }
 
@@ -29,6 +59,11 @@ public class CheckInput
         // Get item name
             // Make sure it is longer than 1 character and less than 257 characters.
 
-        return false;
+        if (itemName.length() < 2 || itemName.length() > 256)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

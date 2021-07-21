@@ -35,7 +35,7 @@ class InventoryEditor {
 }
 
 class CheckInput {
-    checkMonetaryValue(BigDecimal)
+    checkMonetaryValue(String)
     checkSerialNumber(String)
     checkItemName(String)
 }

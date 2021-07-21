@@ -25,22 +25,22 @@
    <bottom>
       <HBox prefHeight="25.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField prefHeight="25.0" promptText="Item Value">
+            <TextField fx:id="itemValueTextField" prefHeight="25.0" promptText="Item Value">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </TextField>
-            <TextField promptText="Item Serial Number" HBox.hgrow="SOMETIMES">
+            <TextField fx:id="itemSerialNumberTextField" promptText="Item Serial Number" HBox.hgrow="SOMETIMES">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </TextField>
-            <TextField prefHeight="25.0" promptText="Item Name" HBox.hgrow="ALWAYS">
+            <TextField fx:id="itemNameTextField" prefHeight="25.0" promptText="Item Name" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </TextField>
-            <Button mnemonicParsing="false" prefHeight="25.0" text="Add New Item">
+            <Button mnemonicParsing="false" onAction="#addItemClicked" prefHeight="25.0" text="Add New Item">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>

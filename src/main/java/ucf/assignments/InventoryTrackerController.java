@@ -8,9 +8,8 @@ package ucf.assignments;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellEditEvent;
-import javafx.scene.control.TableView;
 
 import java.math.BigDecimal;
 
@@ -21,15 +20,55 @@ public class InventoryTrackerController {
     @FXML private TableColumn<Item, String> serialNumberColumn;
     @FXML private TableColumn<Item, String> itemNameColumn;
 
+    // Second: configure TextFields
+    @FXML private TextField itemValueTextField;
+    @FXML private TextField itemSerialNumberTextField;
+    @FXML private TextField itemNameTextField;
+
+    InventoryEditor editInventoryItems = new InventoryEditor();
+    CheckInput checkInputs = new CheckInput();
+
     @FXML private void initialize()
     {
         tableView.setEditable(true);
 
     }
 
-    private void addItemClicked(ActionEvent clickedAddItem)
+    public void addItemClicked(ActionEvent clickedAddItem)
     {
+        // We need to get the values from the text fields.
+        String userTextItemValueString = itemValueTextField.getText();
+        String userTextSerialnumber = itemSerialNumberTextField.getText();
+        String userTextItemName = itemNameTextField.getText();
 
+        boolean valueValid = false;
+        boolean serialNumberValid = false;
+        boolean serialNumberUnique = false;
+        boolean nameValid = false;
+
+        // We need to check that each of these is valid.
+        valueValid = checkInputs.checkItemValue(userTextItemValueString);
+        serialNumberValid = checkInputs.checkSerialNumberValidity(userTextSerialnumber);
+        nameValid = checkInputs.checkItemName(userTextItemName);
+
+        // Verify that the serial number is unique
+            // If it is not, create a dialog box telling the user it is not unique.
+        if (serialNumberValid == true)
+        {
+            serialNumberUnique = checkInputs.checkSerialNumberUniqueness(userTextSerialnumber);
+            if (serialNumberUnique == false)
+            {
+                Alert serialNumberNotUniqueAlert = new Alert(Alert.AlertType.NONE);
+                serialNumberNotUniqueAlert.setTitle("Serial Number Already Exists");
+                serialNumberNotUniqueAlert.setContentText("The serial number you entered already exists.");
+                serialNumberNotUniqueAlert.getButtonTypes().add(ButtonType.OK);
+                serialNumberNotUniqueAlert.showAndWait();
+            }
+        }
+        if (valueValid && serialNumberUnique && nameValid) {
+            BigDecimal userItemValue = new BigDecimal(userTextItemValueString);
+            editInventoryItems.addItem(userItemValue, userTextSerialnumber, userTextItemName);
+        }
     }
     public void removeItemClicked(ActionEvent clickedDeleteItem)
     {
@@ -37,25 +76,25 @@ public class InventoryTrackerController {
     }
 
 
-    private void editItemValue(CellEditEvent cellToEdit)
+    public void editItemValue(CellEditEvent cellToEdit)
     {
 
     }
-    private void editSerialNumber(CellEditEvent cellToEdit)
+    public void editSerialNumber(CellEditEvent cellToEdit)
     {
 
     }
-    private void editName(CellEditEvent cellToEdit)
+    public void editName(CellEditEvent cellToEdit)
     {
 
     }
 
 
-    private void saveItemClicked(EventHandler clickedSaveItem)
+    public void saveItemClicked(EventHandler clickedSaveItem)
     {
 
     }
-    private void loadItemClicked(EventHandler clickedLoadItem)
+    public void loadItemClicked(EventHandler clickedLoadItem)
     {
 
     }
