@@ -32,6 +32,12 @@ class InventoryEditor {
     editItemName(String)
 }
 
+class CheckInput {
+    checkMonetaryValue(BigDecimal)
+    checkSerialNumber(String)
+    checkItemName(String)
+}
+
 class SearchInventory {
     searchName(String)
     searchSerialNumber(String)
@@ -70,6 +76,8 @@ InventoryTrackerController o-- InventoryEditor
 InventoryTrackerController o-- SaveInventory
 InventoryTrackerController o-- LoadInventory
 InventoryTrackerController o-- SearchInventory
+
+InventoryEditor o-- CheckInput
 
 InventoryEditor o-- Inventory
 SearchInventory o-- Inventory

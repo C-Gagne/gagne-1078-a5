@@ -5,5 +5,10 @@
 
 package ucf.assignments;
 
-public class Inventory {
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+public class Inventory
+{
+    private ObservableList<Item> listInventoryItems = FXCollections.observableArrayList();
 }

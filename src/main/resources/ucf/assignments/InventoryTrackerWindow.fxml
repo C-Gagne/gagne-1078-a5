@@ -67,6 +67,7 @@
                   <items>
                     <MenuItem mnemonicParsing="false" text="Search by Name" />
                         <MenuItem mnemonicParsing="false" text="Search by Serial Number" />
+                        <MenuItem mnemonicParsing="false" text="Clear Search" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
