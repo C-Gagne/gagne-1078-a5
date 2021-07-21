@@ -25,6 +25,7 @@ public class InventoryTrackerController {
     @FXML private TextField itemSerialNumberTextField;
     @FXML private TextField itemNameTextField;
 
+    Inventory itemInventory = new Inventory();
     InventoryEditor editInventoryItems = new InventoryEditor();
     CheckInput checkInputs = new CheckInput();
 
@@ -55,7 +56,7 @@ public class InventoryTrackerController {
             // If it is not, create a dialog box telling the user it is not unique.
         if (serialNumberValid == true)
         {
-            serialNumberUnique = checkInputs.checkSerialNumberUniqueness(userTextSerialnumber);
+            serialNumberUnique = checkInputs.checkSerialNumberUniqueness(userTextSerialnumber, itemInventory.getListOfItems());
             if (serialNumberUnique == false)
             {
                 Alert serialNumberNotUniqueAlert = new Alert(Alert.AlertType.NONE);
@@ -70,6 +71,7 @@ public class InventoryTrackerController {
             editInventoryItems.addItem(userItemValue, userTextSerialnumber, userTextItemName);
         }
     }
+
     public void removeItemClicked(ActionEvent clickedDeleteItem)
     {
 

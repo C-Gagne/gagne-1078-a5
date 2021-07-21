@@ -5,6 +5,8 @@
 
 package ucf.assignments;
 
+import javafx.collections.ObservableList;
+
 public class CheckInput
 {
     public boolean checkItemValue(String itemValue)
@@ -46,12 +48,23 @@ public class CheckInput
         return true;
     }
 
-    public boolean checkSerialNumberUniqueness(String serialNumber)
+    public boolean checkSerialNumberUniqueness(String serialNumber, ObservableList<Item> listOfItems)
     {
         // Check list of Inventory Items for the serial number.
             // If it exists, return false.
                 // Else return true.
-        return false;
+        if (listOfItems == null)
+        {
+            return true;
+        }
+
+        for (int i = 0; i < listOfItems.size(); i++) {
+            if (serialNumber == listOfItems.get(i).getSerialNumber())
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean checkItemName(String itemName)
