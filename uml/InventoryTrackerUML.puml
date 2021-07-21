@@ -17,7 +17,9 @@ class InventoryTrackerController {
     + InventoryTrackerController(Inventory)
 
     addItemClicked(EventHandler)
-    editItemClicked(EventHandler)
+    editItemValue(EventHandler)
+    editSerialNumber(EventHandler)
+    editName(EventHandler)
     removeItemClicked(EventHandler)
 
     saveItemClicked(EventHandler)
