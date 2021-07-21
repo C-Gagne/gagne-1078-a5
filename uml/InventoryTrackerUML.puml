@@ -1,0 +1,79 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class InventoryTracker {
+    start()
+    main()
+}
+
+
+class InventoryTrackerController {
+    items: Inventory
+    editItems: InventoryEditor
+    searchItems: SearchInventory
+    saveFile: SaveInventory
+    loadFile: LoadInventory
+
+    + InventoryTrackerController(Inventory)
+
+    addItemClicked(EventHandler)
+    editItemClicked(EventHandler)
+    removeItemClicked(EventHandler)
+
+    saveItemClicked(EventHandler)
+    loadItemClicked(EventHandler)
+}
+
+
+class InventoryEditor {
+    addItem(BigDecimal, String, String)
+    editMonetaryValue(BigDecimal)
+    editSerialNumber(String)
+    editItemName(String)
+}
+
+class SearchInventory {
+    searchName(String)
+    searchSerialNumber(String)
+}
+
+class SaveInventory {
+    saveAsTSV
+    saveAsJSON
+    saveAsHTML
+}
+
+class LoadInventory {
+    loadTSV
+    loadJSON
+    loadHTML
+}
+
+class Inventory {
+    - ObservableList<Item>
+}
+
+class Item {
+    - itemName: SimpleStringProperty
+    - serialNumber: SimpleStringProperty
+    - itemValue: BigDecimal
+
+    + getters & setters
+}
+
+
+openjfx.org.Application <|-- InventoryTracker
+InventoryTracker -- InventoryTrackerController
+
+InventoryTrackerController o-- Inventory
+InventoryTrackerController o-- InventoryEditor
+InventoryTrackerController o-- SaveInventory
+InventoryTrackerController o-- LoadInventory
+InventoryTrackerController o-- SearchInventory
+
+InventoryEditor o-- Inventory
+SearchInventory o-- Inventory
+
+Inventory *-- Item
+
+@enduml
