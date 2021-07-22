@@ -100,7 +100,7 @@ public class InventoryTrackerController {
 
     public void removeItemClicked(ActionEvent clickedDeleteItem)
     {
-
+        tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
     }
 
 
