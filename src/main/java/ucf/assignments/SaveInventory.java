@@ -5,7 +5,7 @@
 
 package ucf.assignments;
 
-import java.io.File;
+import java.io.*;
 
 public class SaveInventory {
     public void saveToTSV(File selectedFile, Inventory itemInventory)
@@ -14,6 +14,28 @@ public class SaveInventory {
          * Create TSV file
          * Write data into file, separating with /t
          */
+
+        Writer writer = null;
+        try {
+            File file = new File(selectedFile.getAbsolutePath());
+            writer = new BufferedWriter(new FileWriter(file));
+            for (int i = 0; i< itemInventory.getListOfItems().size(); i++) {
+                String text = itemInventory.getListOfItems().get(i).getItemValue().toString() + "\t" + itemInventory.getListOfItems().get(i).getSerialNumber() + "\t" + itemInventory.getListOfItems().get(i).getItemName();
+                writer.write(text);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        finally {
+            try {
+                writer.flush();
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 
     public void saveToHTML(File selectedFile, Inventory itemInventory)

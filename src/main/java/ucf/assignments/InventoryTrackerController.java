@@ -5,24 +5,19 @@
 
 package ucf.assignments;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
+
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.util.Callback;
-import javafx.util.StringConverter;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import javafx.util.converter.BigDecimalStringConverter;
-import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.NumberStringConverter;
 
+import java.io.File;
 import java.math.BigDecimal;
 
 public class InventoryTrackerController {
@@ -37,19 +32,27 @@ public class InventoryTrackerController {
     @FXML private TextField itemSerialNumberTextField;
     @FXML private TextField itemNameTextField;
 
+    // Third: configure MenuBar
+    @FXML private MenuBar menuBar;
+    @FXML private Menu file;
+    @FXML private MenuItem newInventory;
+    @FXML private MenuItem saveAs;
+    @FXML private MenuItem load;
+    @FXML private MenuItem quit;
+
     Inventory itemInventory = new Inventory();
     InventoryEditor editInventoryItems = new InventoryEditor();
     CheckInput checkInputs = new CheckInput();
 
     @FXML private void initialize()
     {
-        valueColumn.setCellValueFactory(new PropertyValueFactory<Item, BigDecimal>("itemValue"));
+        valueColumn.setCellValueFactory(new PropertyValueFactory<>("itemValue"));
         valueColumn.setCellFactory(TextFieldTableCell.forTableColumn(new BigDecimalStringConverter()));
 
-        serialNumberColumn.setCellValueFactory(new PropertyValueFactory<Item, String>("serialNumber"));
+        serialNumberColumn.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
         serialNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        itemNameColumn.setCellValueFactory(new PropertyValueFactory<Item, String>("itemName"));
+        itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         itemNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
 
@@ -60,17 +63,18 @@ public class InventoryTrackerController {
         tableView.setItems(itemInventory.getListOfItems());
     }
 
-    public void addItemClicked(ActionEvent clickedAddItem)
+    public void addItemClicked()
     {
         // We need to get the values from the text fields.
         String userTextItemValueString = itemValueTextField.getText();
         String userTextSerialnumber = itemSerialNumberTextField.getText();
         String userTextItemName = itemNameTextField.getText();
 
-        boolean valueValid = false;
-        boolean serialNumberValid = false;
+        boolean valueValid;
+        boolean serialNumberValid;
+        boolean nameValid;
+
         boolean serialNumberUnique = false;
-        boolean nameValid = false;
 
         // We need to check that each of these is valid.
         valueValid = checkInputs.checkItemValue(userTextItemValueString);
@@ -98,11 +102,15 @@ public class InventoryTrackerController {
         }
     }
 
-    public void removeItemClicked(ActionEvent clickedDeleteItem)
+    public void removeItemClicked()
     {
         tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
     }
 
+    public void newInventoryClicked()
+    {
+        itemInventory.getListOfItems().remove(0, itemInventory.getListOfItems().size());
+    }
 
     public void editItemValue(CellEditEvent cellToEdit)
     {
@@ -142,7 +150,7 @@ public class InventoryTrackerController {
             selectedItem.setSerialNumber(cellToEdit.getOldValue().toString());
             tableView.refresh();
         }
-        else if (validSerialNumber) {
+        else {
             uniqueSerialNumber = checkInputs.checkSerialNumberUniqueness(cellToEdit.getNewValue().toString(), itemInventory.getListOfItems());
             if (!uniqueSerialNumber) {
                 Alert serialNumberNotUniqueAlert = new Alert(Alert.AlertType.NONE);
@@ -183,12 +191,41 @@ public class InventoryTrackerController {
     }
 
 
-    public void saveItemClicked(EventHandler clickedSaveItem)
+    public void saveItemClicked()
     {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save New To Do List");
 
+        Stage stage = (Stage) tableView.getScene().getWindow();
+
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("TSV Files", "*.tsv"));
+        File selectedFile = fileChooser.showSaveDialog(stage);
+
+        SaveInventory saveNewFile = new SaveInventory();
+        saveNewFile.saveToTSV(selectedFile, itemInventory);
     }
-    public void loadItemClicked(EventHandler clickedLoadItem)
-    {
 
+    public void loadItemClicked()
+    {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Load To Do List");
+
+        Stage stage = (Stage) tableView.getScene().getWindow();
+
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("TSV Files", "*.tsv"));
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null)
+        {
+            ObservableList<Item> loadedList;
+            LoadInventory loadExistingFile = new LoadInventory();
+            loadedList = loadExistingFile.loadTSV(selectedFile, itemInventory.getListOfItems());
+            tableView.setItems(loadedList);
+
+            for (int i = 0; i < tableView.getItems().size(); i++)
+            {
+                itemInventory.setItemInList(tableView.getItems().get(i));
+            }
+        }
     }
 }
