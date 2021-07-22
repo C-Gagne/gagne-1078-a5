@@ -14,22 +14,13 @@ public class CheckInput
         // Get item value, then make sure it is a valid input
         int decimalCount = 0;
 
-
         for (int i = 0; i < itemValue.length(); i++)
         {
             char charToCheck = itemValue.charAt(i);
 
-            if (decimalCount > 1) {
-                return false;
-            }
-            else if (charToCheck == '.')
-            {
-                decimalCount++;
-            }
-            else if (!Character.isDigit(charToCheck))
-            {
-                return false;
-            }
+            if (decimalCount > 1) { return false; }
+            else if (charToCheck == '.') { decimalCount++; }
+            else if (!Character.isDigit(charToCheck)) { return false; }
         }
 
         return true;
@@ -59,7 +50,7 @@ public class CheckInput
         }
 
         for (int i = 0; i < listOfItems.size(); i++) {
-            if (serialNumber == listOfItems.get(i).getSerialNumber())
+            if (serialNumber.equals(listOfItems.get(i).getSerialNumber()))
             {
                 return false;
             }

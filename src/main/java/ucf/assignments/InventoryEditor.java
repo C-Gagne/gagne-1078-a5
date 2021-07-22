@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class InventoryEditor {
     public Item addItem(BigDecimal itemValue, String serialNumber, String itemName)
     {
-        Item addedItem = new Item();
+        Item addedItem = new Item(itemValue, serialNumber, itemName);
         return addedItem;
     }
     public void editMonetaryValue(BigDecimal selectedItemValue)

@@ -16,6 +16,13 @@ public class Item
     SimpleStringProperty serialNumber;
     SimpleStringProperty itemName;
 
+    public Item(BigDecimal itemValue, String serialNumber, String itemName)
+    {
+        this.itemValue = new SimpleObjectProperty<BigDecimal>(itemValue);
+        this.serialNumber = new SimpleStringProperty(serialNumber);
+        this.itemName = new SimpleStringProperty(itemName);
+    }
+
     public BigDecimal getItemValue() {
         return itemValue.get();
     }
@@ -51,4 +58,5 @@ public class Item
     public void setItemName(String itemName) {
         this.itemName.set(itemName);
     }
+
 }

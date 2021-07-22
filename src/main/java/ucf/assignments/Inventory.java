@@ -6,18 +6,24 @@
 package ucf.assignments;
 
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Inventory
 {
-    private ObservableList<Item> listInventoryItems;
+    private ObservableList<Item> listInventoryItems = FXCollections.observableArrayList();
 
     public ObservableList<Item> getListOfItems()
     {
         return listInventoryItems;
     }
 
-    public void setItemInList(ObservableList<Item> listInventoryItems)
+    public void setItemInList(Item item)
+    {
+        this.listInventoryItems.add(item);
+    }
+
+    public void setListOfItems(ObservableList<Item> listInventoryItems)
     {
         this.listInventoryItems = listInventoryItems;
     }

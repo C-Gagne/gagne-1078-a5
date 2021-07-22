@@ -13,15 +13,6 @@
 <?import javafx.scene.layout.HBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.InventoryTrackerController">
-   <center>
-      <TableView fx:id="tableView" editable="true" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn fx:id="valueColumn" prefWidth="114.0" text="Value" />
-          <TableColumn fx:id="serialNumberColumn" prefWidth="170.0" text="Serial Number" />
-            <TableColumn fx:id="itemNameColumn" prefWidth="315.0" text="Name" />
-        </columns>
-      </TableView>
-   </center>
    <bottom>
       <HBox prefHeight="25.0" BorderPane.alignment="CENTER">
          <children>
@@ -77,8 +68,24 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <Button mnemonicParsing="false" text="Delete Selected Item" HBox.hgrow="NEVER" />
+            <Button mnemonicParsing="false" onAction="#removeItemClicked" text="Delete Selected Item" HBox.hgrow="NEVER" />
          </children>
       </HBox>
    </top>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tableView" editable="true">
+              <columns>
+                <TableColumn fx:id="valueColumn" onEditCommit="#editItemValue" prefWidth="114.0" text="Dollar Value" />
+                <TableColumn fx:id="serialNumberColumn" onEditCommit="#editSerialNumber" prefWidth="170.0" text="Serial Number" />
+                  <TableColumn fx:id="itemNameColumn" onEditCommit="#editName" prefWidth="310.0" text="Name" />
+              </columns>
+            </TableView>
+         </children>
+         <BorderPane.margin>
+            <Insets left="2.0" right="2.0" />
+         </BorderPane.margin>
+      </HBox>
+   </center>
 </BorderPane>
