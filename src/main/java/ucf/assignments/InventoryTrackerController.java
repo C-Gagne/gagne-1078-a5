@@ -198,33 +198,87 @@ public class InventoryTrackerController {
 
         Stage stage = (Stage) tableView.getScene().getWindow();
 
-        fileChooser.getExtensionFilters().add(new ExtensionFilter("TSV Files", "*.tsv"));
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("HTML File", "*.html"));
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("TSV File", "*.tsv"));
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("JSON File", "*.json"));
         File selectedFile = fileChooser.showSaveDialog(stage);
 
-        SaveInventory saveNewFile = new SaveInventory();
-        saveNewFile.saveToTSV(selectedFile, itemInventory);
+        if (selectedFile != null) {
+            int lastPeriod = selectedFile.toString().lastIndexOf('.');
+            String extension = new String();
+
+            for (int i = lastPeriod; i < selectedFile.toString().length(); i++) {
+                extension += (selectedFile.toString().charAt(i));
+            }
+
+
+            if (extension.equalsIgnoreCase(".tsv")) {
+                SaveInventory saveNewFile = new SaveInventory();
+                saveNewFile.saveToTSV(selectedFile, itemInventory);
+            }
+
+            if (extension.equalsIgnoreCase(".html")) {
+                SaveInventory saveNewFile = new SaveInventory();
+                saveNewFile.saveToHTML(selectedFile, itemInventory);
+            }
+
+            if (extension.equalsIgnoreCase(".json")) {
+                SaveInventory saveNewFile = new SaveInventory();
+                saveNewFile.saveToJSON(selectedFile, itemInventory);
+            }
+        }
     }
 
-    public void loadItemClicked()
-    {
+    public void loadItemClicked() {
+        ObservableList<Item> loadedList;
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load To Do List");
 
         Stage stage = (Stage) tableView.getScene().getWindow();
 
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("All Supported File Types", "*.tsv", "*.html", "*.json"));
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("HTML Files", "*.html"));
         fileChooser.getExtensionFilters().add(new ExtensionFilter("TSV Files", "*.tsv"));
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("JSON Files", "*.json"));
         File selectedFile = fileChooser.showOpenDialog(stage);
 
-        if (selectedFile != null)
-        {
-            ObservableList<Item> loadedList;
-            LoadInventory loadExistingFile = new LoadInventory();
-            loadedList = loadExistingFile.loadTSV(selectedFile, itemInventory.getListOfItems());
-            tableView.setItems(loadedList);
+        if (selectedFile != null) {
+            int lastPeriod = selectedFile.toString().lastIndexOf('.');
+            String extension = new String();
 
-            for (int i = 0; i < tableView.getItems().size(); i++)
-            {
-                itemInventory.setItemInList(tableView.getItems().get(i));
+
+            for (int i = lastPeriod; i < selectedFile.toString().length(); i++) {
+                extension += (selectedFile.toString().charAt(i));
+            }
+
+            if (extension.equalsIgnoreCase(".tsv")) {
+                LoadInventory loadExistingFile = new LoadInventory();
+                loadedList = loadExistingFile.loadTSV(selectedFile);
+                tableView.setItems(loadedList);
+
+                for (int i = 0; i < tableView.getItems().size(); i++) {
+                    itemInventory.setItemInList(tableView.getItems().get(i));
+                }
+            }
+
+            if (extension.equalsIgnoreCase(".html")) {
+                LoadInventory loadExistingFile = new LoadInventory();
+                loadedList = loadExistingFile.loadHTML(selectedFile);
+                tableView.setItems(loadedList);
+
+                for (int i = 0; i < tableView.getItems().size(); i++) {
+                    itemInventory.setItemInList(tableView.getItems().get(i));
+                }
+            }
+
+            if (extension.equalsIgnoreCase(".json")) {
+                LoadInventory loadExistingFile = new LoadInventory();
+                tableView.setItems(loadExistingFile.loadJSON(selectedFile));
+                // * tableView.setItems(itemInventory.getListOfItems());
+
+                for (int i = 0; i < tableView.getItems().size(); i++) {
+                    itemInventory.setItemInList(tableView.getItems().get(i));
+                }
             }
         }
     }

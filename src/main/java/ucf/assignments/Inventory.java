@@ -11,12 +11,13 @@ import javafx.collections.ObservableList;
 
 public class Inventory
 {
-    private ObservableList<Item> listInventoryItems = FXCollections.observableArrayList();
+    public ObservableList<Item> listInventoryItems = FXCollections.observableArrayList();
 
     public ObservableList<Item> getListOfItems()
     {
         return listInventoryItems;
     }
+
 
     public void setItemInList(Item item)
     {
