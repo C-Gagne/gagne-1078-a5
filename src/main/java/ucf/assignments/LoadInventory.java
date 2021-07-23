@@ -8,9 +8,15 @@ package ucf.assignments;
 import com.google.gson.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +55,44 @@ public class LoadInventory {
          * Write into observable list
          */
         ObservableList<Item> loadedList = FXCollections.observableArrayList();
+        Path file = Path.of(String.valueOf(selectedFile));
+
+        String value = "";
+        String serialNumber = "";
+        String name;
+
+        try {
+            Document htmlFile = Jsoup.parse(Files.readString(file));
+            Element table = htmlFile.selectFirst("table");
+            Elements rows = table.select("tr");
+
+            for (int i = 1; i< rows.size(); i++)
+            {
+                Element row = rows.get(i);
+                Elements columns = row.select("td");
+
+                for (int j = 0; j < columns.size(); j++)
+                {
+                    if ( j == 0)
+                    {
+                        value = columns.get(0).text();
+                    }
+                    if ( j == 1)
+                    {
+                        serialNumber = columns.get(1).text();
+                    }
+                    if ( j == 2)
+                    {
+                        name = columns.get(2).text();
+                        BigDecimal convertedValue = new BigDecimal(value);
+                        loadedList.add(new Item(convertedValue, serialNumber, name));
+                    }
+                }
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
         return loadedList;
     }
