@@ -110,6 +110,7 @@ public class InventoryTrackerController {
     public void newInventoryClicked()
     {
         itemInventory.getListOfItems().remove(0, itemInventory.getListOfItems().size());
+        tableView.setItems(itemInventory.getListOfItems());
     }
 
     public void editItemValue(CellEditEvent cellToEdit)
@@ -243,6 +244,7 @@ public class InventoryTrackerController {
         File selectedFile = fileChooser.showOpenDialog(stage);
 
         if (selectedFile != null) {
+            itemInventory.getListOfItems().remove(0, itemInventory.getListOfItems().size());
             int lastPeriod = selectedFile.toString().lastIndexOf('.');
             String extension = new String();
 

@@ -29,7 +29,9 @@ public class SaveInventory {
             File file = new File(selectedFile.getCanonicalPath());
             writer = new BufferedWriter(new FileWriter(file));
             for (int i = 0; i < itemInventory.getListOfItems().size(); i++) {
-                String text = itemInventory.getListOfItems().get(i).getItemValue().toString() + "\t" + itemInventory.getListOfItems().get(i).getSerialNumber() + "\t" + itemInventory.getListOfItems().get(i).getItemName();
+                String text = itemInventory.getListOfItems().get(i).getItemValue().toString() + "\t"
+                        + itemInventory.getListOfItems().get(i).getSerialNumber() + "\t"
+                        + itemInventory.getListOfItems().get(i).getItemName() + "\n";
                 writer.write(text);
             }
         } catch (Exception ex) {
@@ -67,7 +69,18 @@ public class SaveInventory {
             writer.write("<style>\n");
             writer.write("\n");
 
+            writer.write("table { \n width:100%; \n } \n");
 
+            writer.write("table, td, th { \n");
+            writer.write("   border: 2px solid black; \n");
+            writer.write("   border-collapse: collapse; \n");
+            writer.write(" }\n");
+            writer.write("td, th { \n");
+            writer.write(" padding: 12px; \n");
+            writer.write(" } \n");
+
+            writer.write("th {\n background-color: DarkRed;\n color: white;\n } \n");
+            writer.write("tr:nth-child(even) {\n background-color: LightPink \n } \n");
 
             writer.write("\n");
             writer.write("</style>\n");
@@ -76,7 +89,7 @@ public class SaveInventory {
             writer.write("<body>\n \n");
 
             writer.write("<center><h3> Inventory </h3></center>\n \n");
-            writer.write("<table style=\"width=100%\">\n \n");
+            writer.write("<table>\n \n");
 
             writer.write("  <tr>\n");
             writer.write("     <th>Value (USD)</th>\n" + "     <th>Serial Number</th>\n" + "     <th>Item Name</th>\n");
