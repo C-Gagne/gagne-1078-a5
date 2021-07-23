@@ -11,6 +11,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -25,7 +26,7 @@ public class SaveInventory {
 
         Writer writer = null;
         try {
-            File file = new File(selectedFile.getAbsolutePath());
+            File file = new File(selectedFile.getCanonicalPath());
             writer = new BufferedWriter(new FileWriter(file));
             for (int i = 0; i < itemInventory.getListOfItems().size(); i++) {
                 String text = itemInventory.getListOfItems().get(i).getItemValue().toString() + "\t" + itemInventory.getListOfItems().get(i).getSerialNumber() + "\t" + itemInventory.getListOfItems().get(i).getItemName();
@@ -57,12 +58,50 @@ public class SaveInventory {
 
         Writer writer = null;
         try {
-            File file = new File(selectedFile.getAbsolutePath());
+            File file = new File(selectedFile.getCanonicalPath());
             writer = new BufferedWriter(new FileWriter(file));
-            for (int i = 0; i < itemInventory.getListOfItems().size(); i++) {
-                String text = itemInventory.getListOfItems().get(i).getItemValue().toString() + "\t" + itemInventory.getListOfItems().get(i).getSerialNumber() + "\t" + itemInventory.getListOfItems().get(i).getItemName();
-                writer.write(text);
+
+            writer.write("<!DOCTYPE html>\n");
+            writer.write("<html>\n" + "<head>\n");
+
+            writer.write("<style>\n");
+            writer.write("\n");
+
+
+
+            writer.write("\n");
+            writer.write("</style>\n");
+            writer.write("</head>\n");
+
+            writer.write("<body>\n \n");
+
+            writer.write("<center><h3> Inventory </h3></center>\n \n");
+            writer.write("<table style=\"width=100%\">\n \n");
+
+            writer.write("  <tr>\n");
+            writer.write("     <th>Value (USD)</th>\n" + "     <th>Serial Number</th>\n" + "     <th>Item Name</th>\n");
+            writer.write("  </tr>\n");
+
+            for (int i = 0; i < itemInventory.getListOfItems().size(); i++)
+            {
+                BigDecimal numberValue = itemInventory.getListOfItems().get(i).getItemValue();
+                String serialNumber = itemInventory.getListOfItems().get(i).getSerialNumber();
+                String itemName = itemInventory.getListOfItems().get(i).getItemName();
+
+                writer.write("  <tr>\n");
+                writer.write("\t <td> " + numberValue.toString() +" </td> \n");
+                writer.write("\t <td> " + serialNumber +" </td> \n");
+                writer.write("\t <td> " + itemName +" </td> \n");
+                writer.write("  </tr>\n \n");
             }
+
+
+            writer.write("</table>\n \n");
+
+
+            writer.write("</body>\n");
+            writer.write("</html>\n");
+
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
