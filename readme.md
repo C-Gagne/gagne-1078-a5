@@ -34,6 +34,18 @@
         <ul><li>Click again to sort in reverse order.</li></ul>
 </ol>
 
+<h3> Searching</h3>
+<ol>
+    <li> Fill out "Search String" text box.</li>
+    <li> Click on ComboBox to the right of the "Search String" text box.</li>
+    <li> Select Option from Dropdown menu.</li>
+        <ul><li>Select "Search By Name" to search list by Item Name.</li></ul>
+        <ul><li>Select "Search By Serial Number" to search list by Item Serial Number</li></ul>
+        <ul>
+            <li>Select "Clear Search" to reset the list.</li>
+         </ul>
+</ol>
+
 <h3>Edit an Existing Item...</h3>
 <ol>
     <li> Double Click cell you want to edit. </li>
