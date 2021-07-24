@@ -6,6 +6,7 @@
 package ucf.assignments;
 
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -224,6 +225,10 @@ public class InventoryTrackerController {
 
     }
 
+    public void quitClicked()
+    {
+        System.exit(0);
+    }
 
     public void saveItemClicked()
     {
