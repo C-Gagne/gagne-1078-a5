@@ -13,27 +13,4 @@ public class InventoryEditor {
         Item addedItem = new Item(itemValue, serialNumber, itemName);
         return addedItem;
     }
-    public void editMonetaryValue(BigDecimal selectedItemValue)
-    {
-        // Get selected item's value
-            // Get new item value
-                // Verify new item value is a valid value
-                    // Use check input function
-                        // If it is, change to new item value
-    }
-    public void editSerialNumber(String selectedSerialNumber)
-    {
-        // Get selected item's SN
-            // Get new SN
-                // Verify new item SN is a valid SN
-                    // Use check input function
-                        // If it is, change to new item SN
-    }
-    public void editItemName(String selectedItemName)
-    {
-        // Get selected item's name
-            // Get new name
-                // Verify length is valid (use Check input function)
-                    // If it is, change selected name to new name
-    }
 }
