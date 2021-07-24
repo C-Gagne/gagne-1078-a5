@@ -2,9 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -42,7 +44,7 @@
    <top>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <MenuBar fx:id="menuBar" prefHeight="25.0" HBox.hgrow="ALWAYS">
+            <MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="50.0">
               <menus>
                 <Menu fx:id="file" mnemonicParsing="false" text="File">
                   <items>
@@ -54,20 +56,11 @@
                     <MenuItem fx:id="quit" mnemonicParsing="false" text="Quit" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Find">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Search by Name" />
-                        <MenuItem mnemonicParsing="false" text="Search by Serial Number" />
-                        <MenuItem mnemonicParsing="false" text="Clear Search" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
               </menus>
             </MenuBar>
+            <TextField fx:id="searchStringField" prefHeight="25.0" prefWidth="175.0" promptText="Search String" />
+            <ChoiceBox fx:id="searchChoiceBox" prefWidth="175.0" />
+            <Separator prefWidth="55.0" HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" onAction="#removeItemClicked" text="Delete Selected Item" HBox.hgrow="NEVER" />
          </children>
       </HBox>

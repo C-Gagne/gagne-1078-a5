@@ -6,7 +6,10 @@
 package ucf.assignments;
 
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellEditEvent;
@@ -32,6 +35,8 @@ public class InventoryTrackerController {
     @FXML private TextField itemSerialNumberTextField;
     @FXML private TextField itemNameTextField;
 
+    @FXML private TextField searchStringField;
+
     // Third: configure MenuBar
     @FXML private MenuBar menuBar;
     @FXML private Menu file;
@@ -40,12 +45,21 @@ public class InventoryTrackerController {
     @FXML private MenuItem load;
     @FXML private MenuItem quit;
 
+    @FXML private ChoiceBox<String> searchChoiceBox;
+
     Inventory itemInventory = new Inventory();
     InventoryEditor editInventoryItems = new InventoryEditor();
     CheckInput checkInputs = new CheckInput();
+    SearchInventory searchInv = new SearchInventory();
 
     @FXML private void initialize()
     {
+        searchChoiceBox.getItems().add("Search By Name");
+        searchChoiceBox.getItems().add("Search By Serial Number");
+        searchChoiceBox.getItems().add("Clear Search");
+        searchChoiceBox.setOnAction(this::choiceBoxOptionPicked);
+
+
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("itemValue"));
         valueColumn.setCellFactory(TextFieldTableCell.forTableColumn(new BigDecimalStringConverter()));
 
@@ -113,6 +127,25 @@ public class InventoryTrackerController {
         tableView.setItems(itemInventory.getListOfItems());
     }
 
+    public void choiceBoxOptionPicked(ActionEvent changedChoice)
+    {
+        if (searchChoiceBox.getSelectionModel().getSelectedItem() == "Clear Search")
+        {
+            tableView.setItems(itemInventory.getListOfItems());
+            tableView.refresh();;
+        }
+        if (searchChoiceBox.getSelectionModel().getSelectedItem() == "Search By Name" && searchStringField != null)
+        {
+            tableView.setItems(searchInv.searchName(searchStringField.getText(), itemInventory.getListOfItems()));
+            tableView.refresh();
+        }
+        if (searchChoiceBox.getSelectionModel().getSelectedItem() == "Search By Serial Number" && searchStringField != null)
+        {
+            tableView.setItems(searchInv.searchSerialNumber(searchStringField.getText(), itemInventory.getListOfItems()));
+            tableView.refresh();
+        }
+
+    }
     public void editItemValue(CellEditEvent cellToEdit)
     {
         boolean validValue;
@@ -206,7 +239,7 @@ public class InventoryTrackerController {
 
         if (selectedFile != null) {
             int lastPeriod = selectedFile.toString().lastIndexOf('.');
-            String extension = new String();
+            String extension = "";
 
             for (int i = lastPeriod; i < selectedFile.toString().length(); i++) {
                 extension += (selectedFile.toString().charAt(i));
@@ -246,7 +279,7 @@ public class InventoryTrackerController {
         if (selectedFile != null) {
             itemInventory.getListOfItems().remove(0, itemInventory.getListOfItems().size());
             int lastPeriod = selectedFile.toString().lastIndexOf('.');
-            String extension = new String();
+            String extension = "";
 
 
             for (int i = lastPeriod; i < selectedFile.toString().length(); i++) {

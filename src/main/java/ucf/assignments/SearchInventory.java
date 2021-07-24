@@ -5,28 +5,26 @@
 
 package ucf.assignments;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
 public class SearchInventory
 {
-    public void searchName(String nameToSearchFor, ObservableList<Inventory> listInventoryItems)
+    public FilteredList<Item> searchName(String nameToSearchFor, ObservableList<Item> listInventoryItems)
     {
         // Search the entire listInventoryItems for all names that contain "stringToSearchFor"
             // Return that filtered list.
+
+        FilteredList<Item> nameSearchedList = listInventoryItems.filtered(item -> item.getItemName().contains(nameToSearchFor));
+        return nameSearchedList;
     }
 
-    public void searchSerialNumber(String serialNumberToSearchFor, ObservableList<Inventory> listInventoryItems)
+    public FilteredList<Item> searchSerialNumber(String serialNumberToSearchFor, ObservableList<Item> listInventoryItems)
     {
         // Search the entire listInventoryItems for all names that contain "serialNumberToSearchFor"
             // Return that filtered list.
-    }
 
-    public ObservableList<Inventory> clearSearch()
-    {
-        ObservableList<Inventory> clearedFilters = FXCollections.observableArrayList();
-        // clearedFilter will just be populated with the original Inventory
-        return  clearedFilters;
+        FilteredList<Item> serialNumberSearchedList = listInventoryItems.filtered(item -> item.getSerialNumber().contains(serialNumberToSearchFor));
+        return serialNumberSearchedList;
     }
 }
