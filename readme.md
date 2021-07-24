@@ -14,14 +14,14 @@
 </ol>
 <h3> Delete Selected Item </h3>
 <STRONG>Warning: This function has no prompt. Save list before use.</STRONG>
-
+<br>
 <ol>
     <li> Select the item you want to delete. </li>
     <li> Click "Deleted Selected Item" button in the top right corner. </li>
 </ol>
 <h3>Clear List</h3>
 <STRONG>Warning: This function has no prompt. Save list before use.</STRONG>
-
+<br>
 <ol>
     <li> Click "File" in the top left. </li>
     <li> Navigate to "New Inventory List". </li>
