@@ -69,7 +69,7 @@ $599.99   S40AZBDE47      Samsung TV
                     [x] --- .tsv
                     [x] --- .html
                     [x] --- .json
-    The user shall be able to load inventory items from a file that was previously created by the application.
+    [x] The user shall be able to load inventory items from a file that was previously created by the application.
         [x] The user shall provide the file name and file location of the file to load
                 --- FileChooser
                     [x] --- .tsv
