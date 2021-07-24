@@ -72,11 +72,6 @@ public class CheckInput
         // Get item name
             // Make sure it is longer than 1 character and less than 257 characters.
 
-        if (itemName.length() < 2 || itemName.length() > 256)
-        {
-            return false;
-        }
-
-        return true;
+        return itemName.length() >= 2 && itemName.length() <= 256;
     }
 }
