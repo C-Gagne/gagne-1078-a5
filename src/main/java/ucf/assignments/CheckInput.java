@@ -35,6 +35,15 @@ public class CheckInput
         {
             return false;
         }
+        else {
+            for (int i = 0; i < serialNumber.length(); i++)
+            {
+                if (!Character.isDigit(serialNumber.charAt(i)) && !Character.isLetter(serialNumber.charAt(i)))
+                {
+                    return false;
+                }
+            }
+        }
 
         return true;
     }
