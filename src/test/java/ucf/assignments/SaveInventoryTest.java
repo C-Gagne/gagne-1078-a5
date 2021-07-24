@@ -21,7 +21,7 @@ class SaveInventoryTest {
         testInventory.setItemInList(new Item(BigDecimal.valueOf(2.45), "AX12345678", "Item Name"));
         testInventory.setItemInList(new Item(BigDecimal.valueOf(2.59), "AX12345679", "Item Name"));
 
-        File selectedFile = new File("src/test/java/ucf/assignments/test/tsvTestSave.tsv");
+        File selectedFile = new File("src/test/java/ucf/assignments/test/tsvTestSave.txt");
 
         SaveInventory saveFile = new SaveInventory();
         saveFile.saveToTSV(selectedFile, testInventory);

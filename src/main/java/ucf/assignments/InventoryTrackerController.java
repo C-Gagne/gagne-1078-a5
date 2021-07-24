@@ -238,7 +238,7 @@ public class InventoryTrackerController {
         Stage stage = (Stage) tableView.getScene().getWindow();
 
         fileChooser.getExtensionFilters().add(new ExtensionFilter("HTML File", "*.html"));
-        fileChooser.getExtensionFilters().add(new ExtensionFilter("TSV File", "*.tsv"));
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("TSV Text File", "*.txt"));
         fileChooser.getExtensionFilters().add(new ExtensionFilter("JSON File", "*.json"));
         File selectedFile = fileChooser.showSaveDialog(stage);
 
@@ -251,7 +251,7 @@ public class InventoryTrackerController {
             }
 
 
-            if (extension.equalsIgnoreCase(".tsv")) {
+            if (extension.equalsIgnoreCase(".txt")) {
                 SaveInventory saveNewFile = new SaveInventory();
                 saveNewFile.saveToTSV(selectedFile, itemInventory);
             }
@@ -275,9 +275,9 @@ public class InventoryTrackerController {
 
         Stage stage = (Stage) tableView.getScene().getWindow();
 
-        fileChooser.getExtensionFilters().add(new ExtensionFilter("All Supported File Types", "*.tsv", "*.html", "*.json"));
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("All Supported File Types", "*.txt", "*.html", "*.json"));
         fileChooser.getExtensionFilters().add(new ExtensionFilter("HTML Files", "*.html"));
-        fileChooser.getExtensionFilters().add(new ExtensionFilter("TSV Files", "*.tsv"));
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("TSV Text Files", "*.txt"));
         fileChooser.getExtensionFilters().add(new ExtensionFilter("JSON Files", "*.json"));
         File selectedFile = fileChooser.showOpenDialog(stage);
 
@@ -291,7 +291,7 @@ public class InventoryTrackerController {
                 extension += (selectedFile.toString().charAt(i));
             }
 
-            if (extension.equalsIgnoreCase(".tsv")) {
+            if (extension.equalsIgnoreCase(".txt")) {
                 LoadInventory loadExistingFile = new LoadInventory();
                 loadedList = loadExistingFile.loadTSV(selectedFile);
                 tableView.setItems(loadedList);

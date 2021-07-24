@@ -66,13 +66,13 @@ $599.99   S40AZBDE47      Samsung TV
              [x] JSON files shall contain valid JSON and end with the extension .json
         [x] The user shall provide the file name and file location of the file to save
                 --- FileChooser
-                    [x] --- .tsv
+                    [x] --- .txt (tsv)
                     [x] --- .html
                     [x] --- .json
     [x] The user shall be able to load inventory items from a file that was previously created by the application.
         [x] The user shall provide the file name and file location of the file to load
                 --- FileChooser
-                    [x] --- .tsv
+                    [x] --- .txt (tsv)
                     [x] --- .html (uses Jsoup to parse .html)
                     [x] --- .json (uses Gson to parse .json)
 

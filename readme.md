@@ -55,7 +55,7 @@
 </ol>
 
 <h3>Save...</h3>
-Accepted Formats: .tsv & .html & .json
+Accepted Formats: .txt (tsv) & .html & .json
 <ol>
     <li> Click "File" in the top left. </li>
     <li> Navigate to "Save as...". </li>
@@ -66,7 +66,7 @@ Accepted Formats: .tsv & .html & .json
 </ol>
 
 <h3>Load...</h3>
-Accepted Formats: .tsv & .html & .json
+Accepted Formats: .txt (tsv) & .html & .json
 <ol>
     <li> Click "File" in the top left. </li>
     <li> Navigate to "Load...". </li>

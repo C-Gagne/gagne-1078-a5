@@ -19,7 +19,7 @@ class LoadInventoryTest {
     void loadTSV_ReadTSV_VerifyValueIsLoaded()
     {
         ObservableList<Item> listForTesting = FXCollections.observableArrayList();
-        File loadedFile = new File("src/test/java/ucf/assignments/test/tsvTestLoad.tsv");
+        File loadedFile = new File("src/test/java/ucf/assignments/test/tsvTestLoad.txt");
         LoadInventory loadFile = new LoadInventory();
 
         listForTesting.setAll(loadFile.loadTSV(loadedFile));
@@ -59,7 +59,7 @@ class LoadInventoryTest {
     void loadTSV_ReadTSV_VerifySNIsLoaded()
     {
         ObservableList<Item> listForTesting = FXCollections.observableArrayList();
-        File loadedFile = new File("src/test/java/ucf/assignments/test/tsvTestLoad.tsv");
+        File loadedFile = new File("src/test/java/ucf/assignments/test/tsvTestLoad.txt");
         LoadInventory loadFile = new LoadInventory();
 
         listForTesting.setAll(loadFile.loadTSV(loadedFile));
@@ -98,7 +98,7 @@ class LoadInventoryTest {
     void loadTSV_ReadTSV_VerifyNameIsLoaded()
     {
         ObservableList<Item> listForTesting = FXCollections.observableArrayList();
-        File loadedFile = new File("src/test/java/ucf/assignments/test/tsvTestLoad.tsv");
+        File loadedFile = new File("src/test/java/ucf/assignments/test/tsvTestLoad.txt");
         LoadInventory loadFile = new LoadInventory();
 
         listForTesting.setAll(loadFile.loadTSV(loadedFile));
