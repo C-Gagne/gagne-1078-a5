@@ -44,7 +44,7 @@ Accepted Formats: .tsv & .html & .json
     <li> Click "File" in the top left. </li>
     <li> Navigate to "Save as...". </li>
     <li> Click "Save as...". </li>
-    <li> A File Chooser will pop up.</li>
+        <ul><li>A File Chooser will pop up.</li></ul>
     <li> Choose location, name file, and select format.</li>
     <li> Click "Save" Button.</li>
 </ol>
@@ -55,7 +55,7 @@ Accepted Formats: .tsv & .html & .json
     <li> Click "File" in the top left. </li>
     <li> Navigate to "Load...". </li>
     <li> Click "Load...". </li>
-    <li> A File Chooser will pop up.</li>
+       <ul><li>A File Chooser will pop up.</li></ul>
     <li> Choose file.</li>
     <li> Click "Open" Button.</li>
 </ol>
