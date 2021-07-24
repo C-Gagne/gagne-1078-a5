@@ -51,7 +51,7 @@
     <li> Double Click cell you want to edit. </li>
     <li> Type in new value. </li>
     <li> Hit enter, and value will be updated. </li>
-        <ul><li>If value is not valid, an alert will pop up.</li></ul>
+        <ul><li>If value is not a valid input, an alert will pop up.</li></ul>
 </ol>
 
 <h3>Save...</h3>
