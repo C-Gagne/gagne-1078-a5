@@ -5,12 +5,8 @@
 
 package ucf.assignments;
 
-
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellEditEvent;
@@ -62,7 +58,16 @@ public class InventoryTrackerController {
 
 
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("itemValue"));
-        valueColumn.setCellFactory(TextFieldTableCell.forTableColumn(new BigDecimalStringConverter()));
+        valueColumn.setCellFactory(TextFieldTableCell.forTableColumn(new BigDecimalStringConverter()
+        {
+            @Override
+            public String toString(final BigDecimal value)
+            {
+                return (String.format("%.2f", value));
+            }
+        }
+        ));
+
 
         serialNumberColumn.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
         serialNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -70,9 +75,7 @@ public class InventoryTrackerController {
         itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         itemNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-
-        itemInventory.setItemInList(new Item(BigDecimal.valueOf(2.45), "AX12345678", "Item Name"));
-
+        // * itemInventory.setItemInList(new Item(BigDecimal.valueOf(2.45), "AX12345678", "Item Name"));
 
         tableView.setEditable(true);
         tableView.setItems(itemInventory.getListOfItems());
@@ -133,17 +136,14 @@ public class InventoryTrackerController {
         if (searchChoiceBox.getSelectionModel().getSelectedItem() == "Clear Search")
         {
             tableView.setItems(itemInventory.getListOfItems());
-            tableView.refresh();;
         }
         if (searchChoiceBox.getSelectionModel().getSelectedItem() == "Search By Name" && searchStringField != null)
         {
             tableView.setItems(searchInv.searchName(searchStringField.getText(), itemInventory.getListOfItems()));
-            tableView.refresh();
         }
         if (searchChoiceBox.getSelectionModel().getSelectedItem() == "Search By Serial Number" && searchStringField != null)
         {
             tableView.setItems(searchInv.searchSerialNumber(searchStringField.getText(), itemInventory.getListOfItems()));
-            tableView.refresh();
         }
 
     }

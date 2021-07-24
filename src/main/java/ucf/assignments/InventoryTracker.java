@@ -45,6 +45,7 @@ $599.99   S40AZBDE47      Samsung TV
         [x] The application shall display an error message if the user enters an existing serial number for the new item
     [x] The user shall be able to remove an existing inventory item
     [0] The user shall be able to edit the value of an existing inventory item
+            [ ] --- Double Check for Bugs...
     [x] The user shall be able to edit the serial number of an existing inventory item
         [x] The application shall prevent the user from duplicating the serial number
                 --- For each item in a list, make sure item does not match this serial number before adding/updating item
@@ -56,24 +57,28 @@ $599.99   S40AZBDE47      Samsung TV
                 --- Built into TableView
     [x] The user shall be able to sort inventory items by name
                 --- Built into TableView
-    [ ] The user shall be able to search for an inventory item by serial number
-    [ ] The user shall be able to search for an inventory item by name
-    [ ] The user shall be able to save their inventory items to a file
+    [x] The user shall be able to search for an inventory item by serial number
+    [x] The user shall be able to search for an inventory item by name
+    [x] The user shall be able to save their inventory items to a file
         [x] The user shall be able to select the file format from among the following set of options: TSV (tab-separated value), HTML, JSON
              [x] TSV files shall shall list one inventory item per line, separate each field within an inventory item using a tab character, and end with the extension .txt
-             [ ] HTML files shall contain valid HTML and end with the extension .html
-             [ ] JSON files shall contain valid JSON and end with the extension .json
+             [x] HTML files shall contain valid HTML and end with the extension .html
+             [x] JSON files shall contain valid JSON and end with the extension .json
         [x] The user shall provide the file name and file location of the file to save
                 --- FileChooser
                     [x] --- .tsv
+                    [x] --- .html
+                    [x] --- .json
     The user shall be able to load inventory items from a file that was previously created by the application.
         [x] The user shall provide the file name and file location of the file to load
                 --- FileChooser
                     [x] --- .tsv
+                    [x] --- .html (uses Jsoup to parse .html)
+                    [x] --- .json (uses Gson to parse .json)
 
         The requirement to save/load an inventory list in JSON format is optional.
          Implementation of this requirement will yield an extra 2 points on this assignment.
-                --- Use GSON & FileChooser
+                    [x] --- Use GSON & FileChooser
  */
 
 
